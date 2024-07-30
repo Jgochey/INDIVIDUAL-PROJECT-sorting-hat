@@ -11,34 +11,6 @@
 
 // You should also be able to expel a student after they have been sorted, which should remove their card from the student array and move them to Moldy Voldy's Army.
 
-const houses = [
-  {
-    id: 1,
-    name: "Gryffindor",
-    color: "Red",
-    students: [],
-  },
-  {
-    id: 2,
-    name: "Ravenclaw",
-    color: "Blue",
-    students: [],
-  },
-  {
-    id: 3,
-    name: "Hufflepuff",
-    color: "Yellow",
-    students: [],
-  },
-  {
-    id: 4,
-    name: "Slytherin",
-    color: "Green",
-    students: []
-  }
-]
-
-// Maybe there needs to be a separte object array for each house? Then the empty students arrays in each house could be assigned their list of students that way.</div>
 const students = [
   {
     id: 1,
@@ -67,29 +39,11 @@ const students = [
 ]
 
 
-
-
-
-let studentForm = "";
-studentForm += `<form>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Enter your Name</label>
-    <input type="name" class="form-control" id="studentNameInput">
-  <button type="submit" class="btn btn-primary">Sort Me!</button>
-</form>`
-renderToDom("#entryForm", studentForm) // This should render the student form to the HTML when it is activated. However, right now I believe it will happen automatically. It needs to ONLY appear when the sorting hat function says so, not right when the page loads. Also, it still needs to actually add the new student information to the student object array and assign them a random house.
-
-// (On-submit-button-click > create new student > assign random house > add new student to object array > rerender student cards)
-// Oh and add the student cards too.
-
-
-
-
-
-
-
-
-
+function randomHouse(max) {
+  return Math.floor(Math.random() * max);
+}
+console.log(randomHouse(4));
+// Will pick a number between 0 and 3, assign each number to a house, then each new student can be assigned a random house.
 
 
 const renderToDom = (divId, html) => { // Looks at the targeted html div (divId) and renders whatever is passed as an argument (html).
@@ -98,42 +52,25 @@ const renderToDom = (divId, html) => { // Looks at the targeted html div (divId)
 }
 
 
+const loadForm = document.querySelector("#sortButton");
+loadForm.addEventListener("click", (e) => {
+
+let studentForm = "";
+studentForm += `<form>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">What is your name?</label>
+    <input type="text" class="form-control" id="studentNameInput" placeholder="Harry Potter">
+  <button type="submit" id="formButton" class="btn btn-primary">Sort Me!</button>
+</form>`
+
+renderToDom("#entryForm", studentForm)
 
 
 
-const renderStudents = (array) => {
-  let studentStuff = "";
+const loadStudents = document.querySelector("#formButton"); // This has to be placed inside the loadForm function or else it will come back undefined. I believe because the "formButton" located inside studentForm does not exist/won't be created outside of this function? So there is nothing for loadStudents to target.
+loadStudents.addEventListener("click", (e) => {
 
-    array.forEach( (item) => {
-      studentStuff += student(item);   
-});
-
-  renderToDom("#students", studentStuff);
-}
-// Do these need to be two seperate functions?
-const renderBanished = (array) => {
-  let banishedStuff = "";
-
-    array.forEach( (item) => {
-      banishedStuff += student(item);   
-});
-
-  renderToDom("#banished", banishedStuff);
-}
-
-// Each student card should have an expel button that sends them over to the banished area (Voldemort's minions).
-// If expelled is set to true, then they should be moved here.
-
-
-
-
-
-
-
-
-
-
-let studentCards = "";  // Testing if the renderStudents function is working.
+let studentCards = ""; 
 studentCards += `
 <div class="card" style="width: 18rem;">
   <img src="..." class="card-img-top" alt="...">
@@ -142,8 +79,54 @@ studentCards += `
   <div class="card-body">
     <h5 class="card-title">Student Name</h5>
     <p class="card-text">House Name</p>
-    <a href="#" class="btn btn-primary">EXPEL!</a>
+    <a href="#" class="btn btn-primary expelBtn">EXPEL!</a>
   </div>
 </div>`
-renderStudents(students)
-// The image should change depending on the color value (house.color) of the house. And obviously the Student Name and House Name should be taken from each of their arrays. (i.e. student.name & house.name)
+
+renderToDom("#students", studentCards)
+})
+
+})
+
+ // Renders the student form to the HTML when it is activated (after clicking the begin sorting process button).
+ // It still needs to actually add the new student information to the student object array and assign them a random house.
+
+// (On-submit-button-click > create new student > assign random house > add new student to object array > rerender student cards)
+
+// The image on the student card should change depending on the house value (student.house). And obviously the Student Name should be taken from their (student.name) inside the students array.
+
+
+
+
+
+
+
+
+
+
+
+
+// const renderStudents = (array) => {
+//   let studentStuff = "";
+
+//     array.forEach( (item) => {
+//       studentStuff += student(item);   
+// });
+
+//   renderToDom("#students", studentStuff);
+// }
+// // Do these need to be two seperate functions?
+// const renderBanished = (array) => {
+//   let banishedStuff = "";
+
+//     array.forEach( (item) => {
+//       banishedStuff += student(item);   
+// });
+
+//   renderToDom("#banished", banishedStuff);
+// }
+
+// // Each student card should have an expel button that sends them over to the banished area (Voldemort's minions).
+// // If expelled is set to true, then they should be moved here.
+
+// renderStudents(students);
