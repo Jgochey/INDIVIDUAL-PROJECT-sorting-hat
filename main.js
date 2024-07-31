@@ -35,6 +35,12 @@ const students = [
     name: "Sneaky",
     house: "Slytherin",
     expelled: false,
+  },
+  {
+    id: 5,
+    name: "Expelled Test",
+    house: "Ravenclaw",
+    expelled: true,
   }
 ]
 
@@ -44,6 +50,7 @@ function randomHouse(max) {
 }
 console.log(randomHouse(4));
 // Will pick a number between 0 and 3, assign each number to a house, then each new student can be assigned a random house.
+// (Get student name and id >>> assign random house >>> set expelled to false >>> render student card)
 
 
 const renderToDom = (divId, html) => { // Looks at the targeted html div (divId) and renders whatever is passed as an argument (html).
@@ -52,48 +59,114 @@ const renderToDom = (divId, html) => { // Looks at the targeted html div (divId)
 }
 
 
+// When the "Begin sorting process" button is clicked, the entry form should be made visible.
+const formDisplay = document.querySelector("#entryForm");
 const loadForm = document.querySelector("#sortButton");
 loadForm.addEventListener("click", (e) => {
+e.preventDefault();
 
-let studentForm = "";
-studentForm += `<form>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">What is your name?</label>
-    <input type="text" class="form-control" id="studentNameInput" placeholder="Harry Potter">
-  <button type="submit" id="formButton" class="btn btn-primary">Sort Me!</button>
-</form>`
-
-renderToDom("#entryForm", studentForm)
+formDisplay.style.display = "block";
+});
 
 
 
-const loadStudents = document.querySelector("#formButton"); // This has to be placed inside the loadForm function or else it will come back undefined. I believe because the "formButton" located inside studentForm does not exist/won't be created outside of this function? So there is nothing for loadStudents to target.
+
+
+
+
+
+
+
+
+
+// This works but it still needs to add the new student to the object array.
+const loadStudents = document.querySelector("#formButton");
 loadStudents.addEventListener("click", (e) => {
+e.preventDefault();
 
-let studentCards = ""; 
+let studentCards = "";
+students.forEach((student) => {
 studentCards += `
 <div class="card" style="width: 18rem;">
   <img src="..." class="card-img-top" alt="...">
   <div class="card-body"></div>
 <div class="card text-end" style="width: 18rem;">
   <div class="card-body">
-    <h5 class="card-title">Student Name</h5>
-    <p class="card-text">House Name</p>
-    <a href="#" class="btn btn-primary expelBtn">EXPEL!</a>
+    <h5 class="card-title">${student.name}/h5>
+    <p class="card-text">${student.house}</p>
+    <a href="#" class="btn btn-primary expelBtn" id="expel--${student.id}">EXPEL!</a>
   </div>
 </div>`
 
 renderToDom("#students", studentCards)
+});
+})
+// The image on the card should change depending on the student's house.
+
+
+
+
+const createStudent = document.querySelector("#formButton");
+createStudent.addEventListener("click", (e) => {
+e.preventDefault();
+
+  const newStudent = {
+    id: students.length + 1,
+    name: document.querySelector("#studentNameInput").value,
+    house: "Ravenclaw",
+    expelled: false,
+  }
+// The ravenclaw should be replaced with a random house...function??
+
+  students.push(newStudent);
+  renderToDom("#students", studentCards) // START HERE: This won't work because studentCards is only declared in the function above.
+  form.reset();
+
 })
 
-})
 
- // Renders the student form to the HTML when it is activated (after clicking the begin sorting process button).
- // It still needs to actually add the new student information to the student object array and assign them a random house.
 
-// (On-submit-button-click > create new student > assign random house > add new student to object array > rerender student cards)
 
-// The image on the student card should change depending on the house value (student.house). And obviously the Student Name should be taken from their (student.name) inside the students array.
+
+
+
+
+
+
+
+
+
+
+
+
+
+// An error message should show if the new student form is left blank when it is submitted.
+// if (("#studentNameInput") === "") {    // Gives an error if the name form is left blank. This does not currently work but I think I'm on the right track.
+//   console.log('Please enter a name.');
+//   throw new Error('Please enter a name.');
+  
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ADD THE NEW STUDENT TO THE STUDENTS ARRAY BEFORE RENDERING.
+// const form = document.querySelector("form");
+// form.addEventListener("submit", createStudent);  
+// Does form work or does the targeting need to be more specific? Also, "submit" might be incorrect?
+
+
 
 
 
