@@ -2,3 +2,8 @@
   background-color: red;
   border: solid 1px red;
 }
+
+ /* Set to display: none to keep off the DOM at first. Toggle it back after the Sorting Button has been clicked. Currently also effects the 5 house sorting buttons, which is good, but I'm not sure why. */
+#entryForm {
+  display: none;
+}

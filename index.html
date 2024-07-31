@@ -25,11 +25,25 @@
 
 </div>
 
+<!-- Moved form from javascript to HTML. Using display: none in CSS should keep it hidden. -->
 <div id="entryForm">
-
+<form>
+  <div class="mb-3">
+    <label for="nameEntry" class="form-label">What is your name?</label>
+    <input type="text" class="form-control" id="studentNameInput" placeholder="Harry Potter">
+  <button type="submit" id="formButton" class="btn btn-primary">Sort Me!</button>
+</form>
 </div>
 
-<!-- There needs to be four buttons to display the list of students by house. There also needs to be a "Show all" button. -->
+<div class="d-inline-flex gap-1" id="sortButtons">
+  <button type="button" id="all-btn" style="background-color: gray; color: white;" class="btn" data-bs-toggle="button">Show All</button>
+  <button type="button" id="gryffindor-btn" style="background-color: red; color: white" class="btn" data-bs-toggle="button">Gryffindor</button>
+  <button type="button" id="hufflepuff-btn" style="background-color: yellow; color: black;" class="btn" data-bs-toggle="button">Hufflepuff</button>
+  <button type="button" id="ravenclaw-btn" style="background-color: blue; color: white;" class="btn" data-bs-toggle="button">Ravenclaw</button>
+  <button type="button" id="slytherin-btn" style="background-color: green; color: white;" class="btn" data-bs-toggle="button">Slytherin</button>
+  
+</div>
+
 <div id="students">
 <p> Check check 1 2</p>
 </div>
