@@ -45,12 +45,24 @@ const students = [
 ]
 
 
+
+// Will pick a number between 0 and 3, assigning a student to a house based on the result.
 function randomHouse(max) {
-  return Math.floor(Math.random() * max);
+  let result = Math.floor(Math.random() * max);
+
+  if (result === 0) {
+    return "Gryffindor"
+  } else if (result === 1) {
+    return "Hufflepuff"
+  } else if (result === 2) {
+    return "Ravenclaw"
+  } else {
+    return "Slytherin"
+  }
+  
 }
 console.log(randomHouse(4));
-// Will pick a number between 0 and 3, assign each number to a house, then each new student can be assigned a random house.
-// (Get student name and id >>> assign random house >>> set expelled to false >>> render student card)
+
 
 
 const renderToDom = (divId, html) => { // Looks at the targeted html div (divId) and renders whatever is passed as an argument (html).
@@ -76,52 +88,45 @@ formDisplay.style.display = "block";
 
 
 
+// cardsOnDom and createStudent seem to be working, however the for (const student of students) needs to be replaced with a forEach instead.
+// ...How hard could that be?
+const cardsOnDom = (students) => {
+  let domString = "";
+  for (const student of students) {
+    domString += `
+ <div class="card" style="width: 18rem;">
+   <img src="..." class="card-img-top" alt="...">
+   <div class="card-body"></div>
+ <div class="card text-end" style="width: 18rem;">
+   <div class="card-body">
+    <h5 class="card-title">${student.name}</h5>
+     <p class="card-text">${student.house}</p>
+     <a href="#" class="btn btn-primary expelBtn" id="expel--${student.id}">EXPEL!</a>
+   </div>
+ </div>`;
+  }
 
-
-
-// This works but it still needs to add the new student to the object array.
-const loadStudents = document.querySelector("#formButton");
-loadStudents.addEventListener("click", (e) => {
-e.preventDefault();
-
-let studentCards = "";
-students.forEach((student) => {
-studentCards += `
-<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body"></div>
-<div class="card text-end" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">${student.name}/h5>
-    <p class="card-text">${student.house}</p>
-    <a href="#" class="btn btn-primary expelBtn" id="expel--${student.id}">EXPEL!</a>
-  </div>
-</div>`
-
-renderToDom("#students", studentCards)
-});
-})
-// The image on the card should change depending on the student's house.
-
-
-
+  renderToDom("#students", domString);
+};
+// The expel button currently does not work, remeber to .split it so they don't all get removed.
+// Also, the image on the card should change depending on the student's house.
 
 const createStudent = document.querySelector("#formButton");
 createStudent.addEventListener("click", (e) => {
 e.preventDefault();
 
+const form = document.querySelector("form");
+
   const newStudent = {
     id: students.length + 1,
     name: document.querySelector("#studentNameInput").value,
-    house: "Ravenclaw",
+    house: randomHouse(4),
     expelled: false,
   }
-// The ravenclaw should be replaced with a random house...function??
-
+  
   students.push(newStudent);
-  renderToDom("#students", studentCards) // START HERE: This won't work because studentCards is only declared in the function above.
+  cardsOnDom(students)
   form.reset();
-
 })
 
 
@@ -132,6 +137,37 @@ e.preventDefault();
 
 
 
+
+
+
+
+
+// let studentCards = "";
+
+
+// // This works but it still needs to add the new student to the object array.
+// const loadStudents = document.querySelector("#sortButton");
+// loadStudents.addEventListener("click", (e) => {
+// e.preventDefault();
+
+// cardsOnDom(students)})
+
+// students.forEach((student) => {
+// studentCards += `
+// <div class="card" style="width: 18rem;">
+//   <img src="..." class="card-img-top" alt="...">
+//   <div class="card-body"></div>
+// <div class="card text-end" style="width: 18rem;">
+//   <div class="card-body">
+//     <h5 class="card-title">${student.name}/h5>
+//     <p class="card-text">${student.house}</p>
+//     <a href="#" class="btn btn-primary expelBtn" id="expel--${student.id}">EXPEL!</a>
+//   </div>
+// </div>`
+
+// renderToDom("#students", studentCards)
+// });
+// })
 
 
 
@@ -146,30 +182,6 @@ e.preventDefault();
 //   throw new Error('Please enter a name.');
   
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ADD THE NEW STUDENT TO THE STUDENTS ARRAY BEFORE RENDERING.
-// const form = document.querySelector("form");
-// form.addEventListener("submit", createStudent);  
-// Does form work or does the targeting need to be more specific? Also, "submit" might be incorrect?
-
-
-
-
-
 
 
 
