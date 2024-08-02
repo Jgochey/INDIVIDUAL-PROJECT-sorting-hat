@@ -1,3 +1,29 @@
+/* Don't forget to add responsive styling for smaller screens. */
+/* The students and banished divs should ideally sit next to each other. */
+
+html {
+  background-color: steelblue;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+#sorting-hat {
+  justify-content: center;
+  align-content: center;
+  background-color: steelblue;
+}
+
+#students {
+  display: flex;
+  background-color: springgreen;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-around;
+}
+
 .expelBtn {
   background-color: red;
   border: solid 1px red;
@@ -6,4 +32,7 @@
  /* Set to display: none to keep off the DOM at first. Toggle it back after the Sorting Button has been clicked. Currently also effects the 5 house sorting buttons, which is good, but I'm not sure why. */
 #entryForm {
   display: none;
+  justify-content: center;
+  align-content: center;
+  background-color: blueviolet;
 }
