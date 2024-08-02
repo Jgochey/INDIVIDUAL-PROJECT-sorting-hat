@@ -35,16 +35,23 @@ const students = [
     name: "Sneaky",
     house: "Slytherin",
     expelled: false,
-  },
-  {
-    id: 5,
-    name: "Expelled Test",
-    house: "Ravenclaw",
-    expelled: true,
   }
 ]
 
-
+const villains = [
+  {
+    id: 1,
+    name: "Expelled Test",
+    house: "Ravenclaw",
+    expelled: true,
+  },
+  {
+    id: 2,
+    name: "A Small Dog",
+    house: "Hufflepuff",
+    expelled: true,
+  }
+]
 
 // Will pick a number between 0 and 3, assigning a student to a house based on the result.
 function randomHouse(max) {
@@ -61,8 +68,6 @@ function randomHouse(max) {
   }
   
 }
-console.log(randomHouse(4));
-
 
 
 const renderToDom = (divId, html) => { // Looks at the targeted html div (divId) and renders whatever is passed as an argument (html).
@@ -81,33 +86,26 @@ formDisplay.style.display = "block";
 });
 
 
-
-
-
-
-
-
-
-// cardsOnDom and createStudent seem to be working, however the for (const student of students) needs to be replaced with a forEach instead.
-// ...How hard could that be?
 const cardsOnDom = (students) => {
   let domString = "";
-  for (const student of students) {
-    domString += `
- <div class="card" style="width: 18rem;">
-   <img src="..." class="card-img-top" alt="...">
-   <div class="card-body"></div>
- <div class="card text-end" style="width: 18rem;">
-   <div class="card-body">
-    <h5 class="card-title">${student.name}</h5>
-     <p class="card-text">${student.house}</p>
-     <a href="#" class="btn btn-primary expelBtn" id="expel--${student.id}">EXPEL!</a>
-   </div>
- </div>`;
-  }
-
-  renderToDom("#students", domString);
+ students.forEach((student => {
+  domString += `
+  <div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body"></div>
+  <div class="card text-end" style="width: 18rem;">
+    <div class="card-body">
+     <h5 class="card-title">${student.name}</h5>
+      <p class="card-text">${student.house}</p>
+      <a href="#" class="btn btn-primary expelBtn" id="expel--${student.id}">EXPEL!</a>
+    </div>
+  </div>`;
+   })
+ )
+   renderToDom("#students", domString);
 };
+ 
+    
 // The expel button currently does not work, remeber to .split it so they don't all get removed.
 // Also, the image on the card should change depending on the student's house.
 
@@ -124,13 +122,76 @@ const form = document.querySelector("form");
     expelled: false,
   }
   
-  students.push(newStudent);
+  students.unshift(newStudent);
   cardsOnDom(students)
   form.reset();
 })
 
 
 
+// Will check the student's house value and return a new array.
+const houseFilter = (array, houseString) => {
+  const houseArray = [];
+
+  array.forEach((element) => {
+    if (element.house === houseString) {
+      houseArray.push(element);
+    }
+  });
+  return houseArray;
+}
+
+
+const allButton = document.querySelector("#all-btn");
+const gryffButton = document.querySelector("#gryffindor-btn");
+const huffButton = document.querySelector("#hufflepuff-btn");
+const raveButton = document.querySelector("#ravenclaw-btn");
+const slyButton = document.querySelector("#slytherin-btn");
+
+allButton.addEventListener("click", () => {
+  cardsOnDom(students);
+});
+
+gryffButton.addEventListener("click", () => {
+  const gryffHouse = houseFilter(students, "Gryffindor");
+  cardsOnDom(gryffHouse);
+});
+
+huffButton.addEventListener("click", () => {
+  const huffHouse = houseFilter(students, "Hufflepuff");
+  cardsOnDom(huffHouse);
+});
+
+raveButton.addEventListener("click", () => {
+  const raveHouse = houseFilter(students, "Ravenclaw");
+  cardsOnDom(raveHouse);
+});
+
+slyButton.addEventListener("click", () => {
+  const slyHouse = houseFilter(students, "Slytherin");
+  cardsOnDom(slyHouse);
+});
+// Each button will display only students from that house.
+
+
+const evilCardsOnDom = (villains) => {
+  let evilDomString = "";
+ villains.forEach((villain => {
+  evilDomString += `
+  <div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body"></div>
+  <div class="card text-end" style="width: 18rem;">
+    <div class="card-body">
+     <h5 class="card-title">${villain.name}</h5>
+     <p>Works for Voldemort now! Oh dear.</p>
+    </div>
+  </div>`;
+   })
+ )
+   renderToDom("#banished", evilDomString);
+};
+// Makes cards for the villains object and adds them to the #banished html.
 
 
 
@@ -142,39 +203,82 @@ const form = document.querySelector("form");
 
 
 
-// let studentCards = "";
-
-
-// // This works but it still needs to add the new student to the object array.
-// const loadStudents = document.querySelector("#sortButton");
-// loadStudents.addEventListener("click", (e) => {
-// e.preventDefault();
-
-// cardsOnDom(students)})
-
-// students.forEach((student) => {
-// studentCards += `
-// <div class="card" style="width: 18rem;">
-//   <img src="..." class="card-img-top" alt="...">
-//   <div class="card-body"></div>
-// <div class="card text-end" style="width: 18rem;">
-//   <div class="card-body">
-//     <h5 class="card-title">${student.name}/h5>
-//     <p class="card-text">${student.house}</p>
-//     <a href="#" class="btn btn-primary expelBtn" id="expel--${student.id}">EXPEL!</a>
-//   </div>
-// </div>`
-
-// renderToDom("#students", studentCards)
-// });
-// })
 
 
 
 
 
+// ***TEST ZONE***
+
+// Make another function to swap the expelled value from false to true, then filter the students to the villains object if it is set to true.
 
 
+
+// const toggleExpelled = (event) => {
+//   if (event.target.id.includes("expel")) {
+//     const [, id] = event.target.id.split('--');
+
+//     const swap = students.findIndex(student => student.id === Number(id))
+
+//     if (students[swap].expelled === false) {
+//       (students[swap].expelled = true)
+//     }
+
+//     // This may not be working
+//     cardsOnDom(students)
+//     evilCardsOnDom(villains)
+//   }
+// }
+// document.querySelector('#students').addEventListener('click', toggleExpelled);
+// // Should automagically begin once a student button is clicked?
+
+
+
+
+// const evilFilter = (array, booleanValue) => {
+
+//   array.forEach((item) => {
+//     if (item.expelled === booleanValue) {
+//       const index = (item)
+//       villains.push(index);
+//       students.pop(index);
+//       // students.splice(index, 1); // This rIght here, what's the oppposite of push?
+//     }
+//   });
+//   cardsOnDom(students)
+//   return villains;
+  
+// };
+
+// const evilButton = document.querySelector("#students");
+
+// evilButton.addEventListener("click", () => {
+//   const evilArmy = evilFilter(students, true);
+//   evilCardsOnDom(evilArmy);
+//   });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ***DON'T FORGET TO DO THIS ZONE***
 
 // An error message should show if the new student form is left blank when it is submitted.
 // if (("#studentNameInput") === "") {    // Gives an error if the name form is left blank. This does not currently work but I think I'm on the right track.
@@ -182,36 +286,3 @@ const form = document.querySelector("form");
 //   throw new Error('Please enter a name.');
   
 // }
-
-
-
-
-
-
-
-
-
-// const renderStudents = (array) => {
-//   let studentStuff = "";
-
-//     array.forEach( (item) => {
-//       studentStuff += student(item);   
-// });
-
-//   renderToDom("#students", studentStuff);
-// }
-// // Do these need to be two seperate functions?
-// const renderBanished = (array) => {
-//   let banishedStuff = "";
-
-//     array.forEach( (item) => {
-//       banishedStuff += student(item);   
-// });
-
-//   renderToDom("#banished", banishedStuff);
-// }
-
-// // Each student card should have an expel button that sends them over to the banished area (Voldemort's minions).
-// // If expelled is set to true, then they should be moved here.
-
-// renderStudents(students);
