@@ -62,29 +62,12 @@ form {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #cardHolder {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
-  align-content: center;
+  align-items: center;
   position: relative;
   gap: 100px;
   width: 1500px;
@@ -94,25 +77,26 @@ form {
 
 
 #students, #banished {
-  flex-grow: 2;
+  flex-grow: 8;
   display: flex;
   /* background-color: springgreen; */
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 10px;
+  width: 45%;
 
 }
 
 
-/* .listed {
+.listed {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: flex-end;
   align-self: flex-end;
-  position: relative;
-
-} */
+  /* position: relative; */
+  width: max-content;
+}
 
 
 
