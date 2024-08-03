@@ -16,7 +16,7 @@ This app will randomly assign a user to one of the four Hogwarts houses from the
 - Clicking one of the House buttons will display students only from that house. Clicking Show All will display all of the students.
 
 ## Video Walkthrough
-https://www.loom.com/share/6f6f6f7eb21042e1be163e496f420381
+https://www.loom.com/share/36e062e9e08d4466a3211bd05dad56ef
 
 ## Links
 - [Site Link](https://jgochey-sorting-hat.netlify.app)
@@ -24,8 +24,9 @@ https://www.loom.com/share/6f6f6f7eb21042e1be163e496f420381
 - [Project Board](https://github.com/Jgochey/INDIVIDUAL-PROJECT-sorting-hat/projects)
 
 ## Project Screenshots
-<img width="1148" alt="Main" src="https://media.discordapp.net/attachments/1116212815993249792/1269122241858240582/1.png?ex=66aee9b1&is=66ad9831&hm=df22e4bd6422495cdc57437b8926b064a07c8f4220d99d6565243479593aa27e&=&format=webp&quality=lossless&width=1440&height=581">
-<img width="1148" alt="Cards" src="https://media.discordapp.net/attachments/1116212815993249792/1269122242323812372/2.png?ex=66aee9b1&is=66ad9831&hm=f489f68d66cf7afabe929f6566ed52dab3783a90413611c65dea80186a40c9ea&=&format=webp&quality=lossless&width=1440&height=521">
+<img width="1148" alt="Main" src="https://media.discordapp.net/attachments/1116212815993249792/1269304233862234183/3revised.png?ex=66af932f&is=66ae41af&hm=fe82686e4e11aa383fd7b8bbf470693ad275cb545060200991f624ea7c4f387c&=&format=webp&quality=lossless&width=1440&height=386">
+<img width="1148" alt="Form" src="https://media.discordapp.net/attachments/1116212815993249792/1269304248617799820/4revised.png?ex=66af9333&is=66ae41b3&hm=f3b2c10c3e5bd1f64cf33a3206193c42c4a51f45b64d80da05b1a82217d6dfdf&=&format=webp&quality=lossless&width=1440&height=263">
+<img width="1148" alt="Cards" src="https://media.discordapp.net/attachments/1116212815993249792/1269304267974639647/5revised.png?ex=66af9338&is=66ae41b8&hm=a34fd38bd3f5fd80d1d350fce14e2a806c90ab28fc43cddd11f2bd55fb9806fc&=&format=webp&quality=lossless&width=1440&height=342">
 
 ## Contributors
 - Josh Gochey:  https://github.com/Jgochey

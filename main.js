@@ -78,9 +78,9 @@ formDisplay.style.display = "block";
 const cardsOnDom = (students) => {
   let domString = "";
  students.forEach((student => {
-  domString += `<div class="card listed" style="width: 18rem;">
-<div class="card-body"></div>
-  <div class="card text-end" style="width: 18rem;">
+  domString += `
+<div class="card-body listed"></div>
+  <div class="card text-end" style="width: 40%;">
     <div class="card-body">
       <h5 class="card-title">${student.name}</h5>
       <p class="card-text">${student.house}</p>
@@ -173,10 +173,9 @@ slyButton.addEventListener("click", () => {
 const evilCardsOnDom = (villains) => {
   let evilDomString = "";
  villains.forEach((villain => {
-  evilDomString += `<div class="card listed" style="width: 18rem;">
-<div class="card-body"></div>
- 
-  <div class="card text-end" style="width: 18rem;">
+  evilDomString += `
+<div class="card-body listed"></div>
+  <div class="card text-end" style="width: 40%;">
     <div class="card-body">
      <h5 class="card-title">${villain.name}</h5>
      <p>Works for Voldemort now! Oh dear.</p>
@@ -194,11 +193,6 @@ const toggleExpelled = (event) => {
     const [, id] = event.target.id.split('--'); // Splits at the '--' so the word expel isn't added along with the ID.
 
     const swap = students.findIndex(event=> event.id === Number(id)) // Finds the ID of the student who is getting expelled.
-    console.log(swap)
-
-    // if (students[swap].expelled === false) {
-    //   (students[swap].expelled = true)
-    // }
 
     const newVillain = {
       id: villains.length + 1,
