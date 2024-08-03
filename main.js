@@ -1,16 +1,5 @@
 // My data notes are at:  https://dbdiagram.io/d/Houses-66a513c28b4bb5230e832d1f
 
-
-// This is what the finished app should have:
-
-// To start off with, you will use a bootstrap card to have your sorting hat introduce itself and start the sorting process (by clicking on a button). The form should not be on the DOM until the button click happens.
-
-// A bootstrap form will then appear to fill in the student's name and a button to sort. This should then assign the student to a random house (Gryffindor, Hufflepuff, Ravenclaw, or Slytherin).
-
-// On sorting a student, the form should clear and a bootstrap card with the student's name and a random house assignment should print below the form.
-
-// You should also be able to expel a student after they have been sorted, which should remove their card from the student array and move them to Moldy Voldy's Army.
-
 const students = [
   {
     id: 1,
@@ -53,6 +42,7 @@ const villains = [
   }
 ]
 
+
 // Will pick a number between 0 and 3, assigning a student to a house based on the result.
 function randomHouse(max) {
   let result = Math.floor(Math.random() * max);
@@ -66,7 +56,6 @@ function randomHouse(max) {
   } else {
     return "Slytherin"
   }
-  
 }
 
 
@@ -90,12 +79,12 @@ const cardsOnDom = (students) => {
   let domString = "";
  students.forEach((student => {
   domString += `
-  <div class="card" style="width: 18rem;">
+  <div class="card listed" style="width: 18rem;">
     <img src="..." class="card-img-top" alt="...">
     <div class="card-body"></div>
   <div class="card text-end" style="width: 18rem;">
     <div class="card-body">
-     <h5 class="card-title">${student.name}</h5>
+      <h5 class="card-title">${student.name}</h5>
       <p class="card-text">${student.house}</p>
       <a href="#" class="btn btn-primary expelBtn" id="expel--${student.id}">EXPEL!</a>
     </div>
@@ -105,15 +94,18 @@ const cardsOnDom = (students) => {
    renderToDom("#students", domString);
 };
  
-    
-// The expel button currently does not work, remeber to .split it so they don't all get removed.
-// Also, the image on the card should change depending on the student's house.
 
+// Creates a new student card using the name put into the box. If there was no name entered, an error message will appear.
 const createStudent = document.querySelector("#formButton");
 createStudent.addEventListener("click", (e) => {
 e.preventDefault();
 
 const form = document.querySelector("form");
+
+if (document.querySelector("#studentNameInput").value === "") {
+  alert("Please enter a name.")
+  throw new Error('Please enter a name.');
+}
 
   const newStudent = {
     id: students.length + 1,
@@ -126,7 +118,6 @@ const form = document.querySelector("form");
   cardsOnDom(students)
   form.reset();
 })
-
 
 
 // Will check the student's house value and return a new array.
@@ -178,7 +169,7 @@ const evilCardsOnDom = (villains) => {
   let evilDomString = "";
  villains.forEach((villain => {
   evilDomString += `
-  <div class="card" style="width: 18rem;">
+  <div class="card listed" style="width: 18rem;">
     <img src="..." class="card-img-top" alt="...">
     <div class="card-body"></div>
   <div class="card text-end" style="width: 18rem;">
@@ -195,6 +186,34 @@ const evilCardsOnDom = (villains) => {
 
 
 
+const toggleExpelled = (event) => {
+  if (event.target.id.includes("expel")) {  // Finds the expel button.
+    const [, id] = event.target.id.split('--'); // Splits at the '--' so the word expel isn't added along with the ID.
+
+    const swap = students.findIndex(event=> event.id === Number(id)) // Finds the ID of the student who is getting expelled.
+    console.log(swap)
+
+    // if (students[swap].expelled === false) {
+    //   (students[swap].expelled = true)
+    // }
+
+    const newVillain = {
+      id: villains.length + 1,
+      name: (students[swap].name),
+      house: (students[swap].house),
+      expelled: true,
+    } // Creates a new entry in the villain array using data from the expelled student.
+
+    students.splice(swap, 1); // Removes the expelled student from the students array.
+    
+    villains.unshift(newVillain); // Adds the new villain.
+    cardsOnDom(students)
+    evilCardsOnDom(villains)
+    // Repaints the dom to remove the "old" student and add the "new" villain.
+  }
+}
+document.querySelector('#students').addEventListener('click', toggleExpelled);
+// Runs toggleExpelled when students is clicked.
 
 
 
@@ -206,83 +225,8 @@ const evilCardsOnDom = (villains) => {
 
 
 
+// ***BONUS ZONE***
 
-
-// ***TEST ZONE***
-
-// Make another function to swap the expelled value from false to true, then filter the students to the villains object if it is set to true.
-
-
-
-// const toggleExpelled = (event) => {
-//   if (event.target.id.includes("expel")) {
-//     const [, id] = event.target.id.split('--');
-
-//     const swap = students.findIndex(student => student.id === Number(id))
-
-//     if (students[swap].expelled === false) {
-//       (students[swap].expelled = true)
-//     }
-
-//     // This may not be working
-//     cardsOnDom(students)
-//     evilCardsOnDom(villains)
-//   }
-// }
-// document.querySelector('#students').addEventListener('click', toggleExpelled);
-// // Should automagically begin once a student button is clicked?
-
-
-
-
-// const evilFilter = (array, booleanValue) => {
-
-//   array.forEach((item) => {
-//     if (item.expelled === booleanValue) {
-//       const index = (item)
-//       villains.push(index);
-//       students.pop(index);
-//       // students.splice(index, 1); // This rIght here, what's the oppposite of push?
-//     }
-//   });
-//   cardsOnDom(students)
-//   return villains;
-  
-// };
-
-// const evilButton = document.querySelector("#students");
-
-// evilButton.addEventListener("click", () => {
-//   const evilArmy = evilFilter(students, true);
-//   evilCardsOnDom(evilArmy);
-//   });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ***DON'T FORGET TO DO THIS ZONE***
-
-// An error message should show if the new student form is left blank when it is submitted.
-// if (("#studentNameInput") === "") {    // Gives an error if the name form is left blank. This does not currently work but I think I'm on the right track.
-//   console.log('Please enter a name.');
-//   throw new Error('Please enter a name.');
-  
-// }
+// The image on the card should change depending on the student's house.
+// The student cards should be arranged by some criteria (alphabetically/by house).
+// The expelled student's cards should look different from the normal students.
