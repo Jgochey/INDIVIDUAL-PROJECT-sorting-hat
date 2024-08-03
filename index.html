@@ -29,8 +29,8 @@
 <div id="entryForm">
 <form>
   <div class="mb-3">
-    <label for="nameEntry" class="form-label">What is your name?</label>
-    <input type="text" class="form-control" id="studentNameInput" placeholder="Harry Potter">
+    <label for="nameEntry" id="thisWasBotheringMe" class="form-label">What is your name?</label>
+    <input type="text" class="form-control" id="studentNameInput" placeholder="Harry Potter" required>
   <button type="submit" id="formButton" class="btn btn-primary">Sort Me!</button>
 </form>
 </div>
@@ -44,16 +44,19 @@
   
 </div>
 
-<div id="students">
-<p> Check check 1 2</p>
-</div>
+<div id="cardHolder">
+
+  <div id="students">
+
+  </div>
 
 <!-- When a student is expelled they should be displayed in this separate area under Voldemort's minions. -->
-<div id="banished">
-<h1>Voldy's Minions go here</h1>
+  <div id="banished">
+  
+  </div>
+
 </div>
 
- 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="main.js"></script>
 </body>
