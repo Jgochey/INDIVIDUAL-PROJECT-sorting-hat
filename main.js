@@ -1,45 +1,45 @@
 // My data notes are at:  https://dbdiagram.io/d/Houses-66a513c28b4bb5230e832d1f
 
 const students = [
-  {
-    id: 1,
-    name: "Burgerman",
-    house: "Gryffindor",
-    expelled: false,
-  },
-  {
-    id: 2,
-    name: "Joe",
-    house: "Ravenclaw",
-    expelled: false,
-  },
-  {
-    id: 3,
-    name: "Examplarina",
-    house: "Hufflepuff",
-    expelled: false,
-  },
-  {
-    id: 4,
-    name: "Sneaky",
-    house: "Slytherin",
-    expelled: false,
-  }
+  // {
+  //   id: 1,
+  //   name: "Burgerman",
+  //   house: "Gryffindor",
+  //   expelled: false,
+  // },
+  // {
+  //   id: 2,
+  //   name: "Joe",
+  //   house: "Ravenclaw",
+  //   expelled: false,
+  // },
+  // {
+  //   id: 3,
+  //   name: "Examplarina",
+  //   house: "Hufflepuff",
+  //   expelled: false,
+  // },
+  // {
+  //   id: 4,
+  //   name: "Sneaky",
+  //   house: "Slytherin",
+  //   expelled: false,
+  // }
 ]
 
 const villains = [
-  {
-    id: 1,
-    name: "Expelled Test",
-    house: "Ravenclaw",
-    expelled: true,
-  },
-  {
-    id: 2,
-    name: "A Small Dog",
-    house: "Hufflepuff",
-    expelled: true,
-  }
+  // {
+  //   id: 1,
+  //   name: "Expelled Test",
+  //   house: "Ravenclaw",
+  //   expelled: true,
+  // },
+  // {
+  //   id: 2,
+  //   name: "A Small Dog",
+  //   house: "Hufflepuff",
+  //   expelled: true,
+  // }
 ]
 
 
