@@ -6,12 +6,6 @@
 }
 
 
-.expelBtn {
-  background-color: red;
-  border: solid 1px red;
-}
-
-
 #formButton {
   margin-top: 8px;
 }
@@ -36,7 +30,7 @@ form {
   width: 450px;
   flex-direction: row;
   flex-wrap: wrap;
-  position: sticky;
+  position: relative;
   margin: 5px;
   left: 38%;
 }
@@ -62,15 +56,22 @@ form {
 }
 
 
+.expelBtn {
+  background-color: red;
+  border: solid 1px red;
+  width: 200px;
+}
+
+
 #cardHolder {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  position: relative;
+  position: static;
   gap: 100px;
-  width: 1500px;
+  /* width: 1500px; */
   left: 8%;
   
 }
@@ -84,7 +85,7 @@ form {
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 10px;
-  width: 45%;
+  width: 20%;
 
 }
 
@@ -92,33 +93,34 @@ form {
 .listed {
   display: flex;
   flex-wrap: nowrap;
-  align-items: flex-end;
-  align-self: flex-end;
-  /* position: relative; */
-  width: max-content;
+  /* align-items: flex-end;
+  align-self: flex-end; */
+  position: relative;
+  width: 20%;
 }
-
-
-
-
-
-
-
-
 
 
 @media (max-width: 600px) {
   #students, #banished {
     background-color: blue;
-    color: red;
-    flex-direction: column;
+    /* color: red; */
+    flex-direction: row;
+    flex-wrap: wrap;
   }
   form {
     left: 20%;
   }
+  .listed {
+    position: relative;
+    width: 15%
+  }
   #cardHolder{
-    position: static;
+    position: relative;
     left: 0;
-    width: fit-content;
+    /* width: fit-content; */
+    gap: 5px;
+  }
+  .expelBtn {
+    width: 96%;
   }
 }
